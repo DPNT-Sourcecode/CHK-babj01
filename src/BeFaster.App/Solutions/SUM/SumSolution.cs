@@ -1,6 +1,4 @@
-﻿using BeFaster.Runner.Exceptions;
-
-namespace BeFaster.App.Solutions.SUM
+﻿namespace BeFaster.App.Solutions.SUM
 {
     public static class SumSolution
     {
@@ -8,3 +6,4 @@ namespace BeFaster.App.Solutions.SUM
             x + y;
     }
 }
+
