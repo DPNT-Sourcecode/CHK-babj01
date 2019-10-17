@@ -8,4 +8,3 @@ namespace BeFaster.App.Solutions.SUM
             x + y;
     }
 }
-
