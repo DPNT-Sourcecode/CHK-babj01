@@ -81,10 +81,6 @@
       <Name>BeFaster.Runner</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Solutions\ARRS\" />
-    <Folder Include="Solutions\IRNG\" />
-    <Folder Include="Solutions\CHL\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
