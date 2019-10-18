@@ -21,8 +21,11 @@ namespace BeFaster.App.Solutions.CHK
                         grouping => grouping.Key,
                         grouping => grouping.Count());
 
-            skuToCountMapping
+            var aCount = skuToCountMapping.GetValueOrDefault('A');
+            var bCount = skuToCountMapping.GetValueOrDefault('B');
+            var eCount = skuToCountMapping.GetValueOrDefault('E');
         }
 
     }
 }
+

@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BeFaster.App.Solutions.CHK
 {
-    class DictionaryExtensions
+    public static class DictionaryExtensions
     {
+        public static TValue GetValueOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key)
+        {
+            if (!dictionary.TryGetValue(key, out var value))
+            {
+                value = default;
+            }
+
+            return value;
+        }
     }
 }
+
