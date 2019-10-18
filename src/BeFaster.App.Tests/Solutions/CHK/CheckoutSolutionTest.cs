@@ -13,5 +13,3 @@ namespace BeFaster.App.Tests.Solutions.CHK
             CheckoutSolution.ComputePrice(skus);
     }
 }
-
-
