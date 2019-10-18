@@ -43,12 +43,14 @@ namespace BeFaster.App.Solutions.CHK
 
         public static int ComputePrice(string skus)
         {
+            var sum = 0;
+
             try
             {
-                var skusAndCounts = skus.GroupBy(_ => _).Select(_ => (_.Key, _.Count()));
-                var sum = 0;
-                foreach (var (sku, count) in skusAndCounts)
+                foreach (var skuAndCount in skus.GroupBy(_ => _).Select(_ => (_.Key, _.Count())))
                 {
+                    var (sku, count) = skuAndCount;
+
                     foreach (var (amount, price) in SkuToAmountsAndPricesMapping[sku])
                     {
                         sum += count / amount * price;
@@ -68,4 +70,5 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 
