@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using BeFaster.Runner.Exceptions;
 
 namespace BeFaster.App.Solutions.CHK
@@ -39,9 +40,18 @@ namespace BeFaster.App.Solutions.CHK
                     }
                 }
             };
+
         public static int ComputePrice(string skus)
         {
+            var skusList = skus.Split(',').ToList();
+            var skuToCountMapping = skusList.GroupBy(_ => _).ToDictionary(_ => char.Parse(_.Key), _ => _.Count());
+            var sum = 0;
+            foreach (var skuToCount in skuToCountMapping)
+            {
+                
+            }
         }
     }
 }
+
 
