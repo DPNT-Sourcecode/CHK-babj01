@@ -1,4 +1,5 @@
-﻿using BeFaster.Runner.Exceptions;
+﻿using System.Collections.Generic;
+using BeFaster.Runner.Exceptions;
 
 namespace BeFaster.App.Solutions.CHK
 {
@@ -6,7 +7,8 @@ namespace BeFaster.App.Solutions.CHK
     {
         public static int ComputePrice(string skus)
         {
-            throw new SolutionNotImplementedException();
+            var skuToAmountAndPrice = new Dictionary<int, (int Amount, int Price)>();
         }
     }
 }
+
