@@ -6,6 +6,8 @@ namespace BeFaster.App.Tests.Solutions.CHK
     [TestFixture]
     public class CheckoutSolutionTest
     {
+        [TestCase(null, ExpectedResult = -1)]
+        [TestCase("a", ExpectedResult = -1)]
         [TestCase("", ExpectedResult = 0)]
         [TestCase("AAA", ExpectedResult = 130)]
         [TestCase("AAAAA", ExpectedResult = 200)]
@@ -25,4 +27,5 @@ namespace BeFaster.App.Tests.Solutions.CHK
             CheckoutSolution.ComputePrice(skus);
     }
 }
+
 
