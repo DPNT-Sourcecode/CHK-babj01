@@ -9,6 +9,8 @@ namespace BeFaster.App.Solutions.CHK
     {
         public static int ComputePrice(string skus)
         {
+            // Tried to make it generic but you're making me...
+
             if (skus == null || !skus.Matches("^[A-E]*$"))
             {
                 Console.WriteLine($"Illegal input [{nameof(skus)}={skus ?? "null"}]");
