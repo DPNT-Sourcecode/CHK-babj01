@@ -8,6 +8,3 @@ namespace BeFaster.App.Solutions.HLO
             $"Hello, {friendName}!";
     }
 }
-
-
-
