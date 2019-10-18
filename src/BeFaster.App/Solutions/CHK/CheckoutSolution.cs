@@ -45,8 +45,7 @@ namespace BeFaster.App.Solutions.CHK
         {
             try
             {
-                var skusList = skus.Split(',').ToList();
-                var skusAndCounts = skusList.GroupBy(_ => _).Select(_ => (char.Parse(_.Key), _.Count()));
+                var skusAndCounts = skus.GroupBy(_ => _).Select(_ => (_.Key, _.Count()));
                 var sum = 0;
                 foreach (var skuToCount in skusAndCounts)
                 {
