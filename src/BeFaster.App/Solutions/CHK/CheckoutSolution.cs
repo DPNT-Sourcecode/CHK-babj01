@@ -60,11 +60,13 @@ namespace BeFaster.App.Solutions.CHK
                         break;
                     }
                 }
-                
             }
+
+            return sum;
         }
     }
 }
+
 
 
 
