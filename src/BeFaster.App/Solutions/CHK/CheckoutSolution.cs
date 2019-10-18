@@ -37,14 +37,19 @@ namespace BeFaster.App.Solutions.CHK
             var pricedBAfter2Count = pricedBCount % 2;
             var bPrice = pricedBCount / 2 * 45 + pricedBAfter2Count * 30;
 
+            var fAfter3Count = fCount % 3;
+            var fPrice = (fCount / 3 * 2 + fAfter3Count) * 10;
+
             return
                 aPrice +
                 bPrice +
                 skuToCountMapping.GetValueOrDefault('C') * 20 +
                 skuToCountMapping.GetValueOrDefault('D') * 15 +
-                eCount * 40;
+                eCount * 40 +
+                fPrice;
         }
 
     }
 }
+
 
