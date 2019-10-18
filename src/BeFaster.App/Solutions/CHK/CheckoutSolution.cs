@@ -47,10 +47,8 @@ namespace BeFaster.App.Solutions.CHK
             {
                 var skusAndCounts = skus.GroupBy(_ => _).Select(_ => (_.Key, _.Count()));
                 var sum = 0;
-                foreach (var skuToCount in skusAndCounts)
+                foreach (var (sku, count) in skusAndCounts)
                 {
-                    var (sku, count) = skuToCount;
-
                     foreach (var (amount, price) in SkuToAmountsAndPricesMapping[sku])
                     {
                         sum += count / amount * price;
@@ -70,3 +68,4 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
