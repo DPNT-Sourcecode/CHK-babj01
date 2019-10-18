@@ -42,7 +42,6 @@ namespace BeFaster.App.Solutions.CHK
             new []
             {
                 ('B', 'E', 2),
-                ('Q', 'U', 3),
                 ('M', 'N', 3),
                 ('Q', 'R', 3)
             };
