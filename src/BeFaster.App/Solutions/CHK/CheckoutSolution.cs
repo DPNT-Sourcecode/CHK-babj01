@@ -38,13 +38,13 @@ namespace BeFaster.App.Solutions.CHK
                 {'Z', new[] {(1, 50)}}
             };
 
-        private static readonly Dictionary<char, (char QualifyingSku, int Amount)> SkuToQualifyingSkuAndAmountMapping =
-            new Dictionary<char, (char, int)>
+        private static readonly (char FreeSku, char QualifyingSku, int Amount)[] FreeSkuToQualifyingSkuAndAmount =
+            new []
             {
-                {'B', ('E', 2)},
-                {'Q', ('U', 3)},
-                {'M', ('N', 3)},
-                {'Q', ('R', 3)}
+                ('B', 'E', 2),
+                ('Q', 'U', 3),
+                ('M', 'N', 3),
+                ('Q', 'R', 3)
             };
 
         public static int ComputePrice(string skus)
@@ -54,6 +54,8 @@ namespace BeFaster.App.Solutions.CHK
                 Console.WriteLine($"Invalid input [{nameof(skus)}={skus ?? "null"}]");
                 return -1;
             }
+
+            foreach
 
             var sum = 0;
             foreach (var skuAndCount in skus.GroupBy(_ => _).Select(_ => (_.Key, _.Count())))
