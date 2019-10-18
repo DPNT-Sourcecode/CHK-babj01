@@ -7,47 +7,68 @@ namespace BeFaster.App.Solutions.CHK
 {
     public static class CheckoutSolution
     {
+        private static readonly Dictionary<char, (int Amount, int Price)[]> SkuToAmountsAndPricesMapping =
+            new Dictionary<char, (int Amount, int Price)[]>
+            {
+                {'A', new[] {(5, 200), (3, 130), (1, 50)}},
+                {'B', new[] {(2, 45), (1, 30)}},
+                {'C', new[] {(1, 20)}},
+                {'D', new[] {(1, 15)}},
+                {'E', new[] {(1, 40) /*| 2 get one B free */}},
+                {'F', new[] {(1, 10) /*| 2 get one F free */}},
+                {'G', new[] {(1, 20)}},
+                {'H', new[] {(10, 80), (5, 45), (1, 10)}},
+                {'I', new[] {(1, 35)}},
+                {'J', new[] {(1, 60)}},
+                {'K', new[] {(2, 150), (1, 80)}},
+                {'L', new[] {(1, 90)}},
+                {'M', new[] {(1, 15)}},
+                {'N', new[] {(1, 40) /*,et one M free */}},
+                {'O', new[] {(1, 10)}},
+                {'P', new[] {(5, 200), (1, 50)}},
+                {'Q', new[] {(3, 80), (1, 30)}},
+                {'R', new[] {(1, 50) /*,et one Q free   */}},
+                {'S', new[] {(1, 30)}},
+                {'T', new[] {(1, 20)}},
+                {'U', new[] {(1, 40) /*,et one U free  */}},
+                {'V', new[] {(3, 130), (2, 90), (1, 50)}},
+                {'W', new[] {(1, 20)}},
+                {'X', new[] {(1, 90)}},
+                {'Y', new[] {(1, 10)}},
+                {'Z', new[] {(1, 50)}}
+            };
+
         public static int ComputePrice(string skus)
         {
-            // Tried to make it generic but you're making me...
-
-            if (skus == null || !skus.Matches("^[A-F]*$"))
+            if (skus == null || skus.Matches("^[A-Z]*$"))
             {
-                Console.WriteLine($"Illegal input [{nameof(skus)}={skus ?? "null"}]");
-                return -1;
+                Console.WriteLine($"Invalid input [{nameof(skus)}={skus ?? "null"}]");
             }
 
-            var skuToCountMapping =
-                skus.GroupBy(sku => sku).
-                    ToDictionary(
-                        grouping => grouping.Key,
-                        grouping => grouping.Count());
+            var sum = 0;
+            try
+            {
+                foreach (var skuAndCount in skus.GroupBy(_ => _).Select(_ => (_.Key, _.Count())))
+                {
+                    var (sku, count) = skuAndCount;
 
-            var aCount = skuToCountMapping.GetValueOrDefault('A');
-            var bCount = skuToCountMapping.GetValueOrDefault('B');
-            var eCount = skuToCountMapping.GetValueOrDefault('E');
-            var fCount = skuToCountMapping.GetValueOrDefault('F');
+                    foreach (var (amount, price) in SkuToAmountsAndPricesMapping[sku])
+                    {
+                        sum += count / amount * price;
+                        count %= amount;
 
-            var aAfter5Count = aCount % 5;
-            var aAfter3Count = aAfter5Count % 3;
-            var aPrice = aCount / 5 * 200 + aAfter5Count / 3 * 130 + aAfter3Count * 50;
+                        if (count == 0) break;
+                    }
+                }
 
-            var freeBCount = eCount / 2;
-            var pricedBCount = Math.Max(bCount - freeBCount, 0);
-            var pricedBAfter2Count = pricedBCount % 2;
-            var bPrice = pricedBCount / 2 * 45 + pricedBAfter2Count * 30;
-
-            var fAfter3Count = fCount % 3;
-            var fPrice = (fCount / 3 * 2 + fAfter3Count) * 10;
-
-            return
-                aPrice +
-                bPrice +
-                skuToCountMapping.GetValueOrDefault('C') * 20 +
-                skuToCountMapping.GetValueOrDefault('D') * 15 +
-                eCount * 40 +
-                fPrice;
+                return sum;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return -1;
+            }
         }
-
     }
+
 }
