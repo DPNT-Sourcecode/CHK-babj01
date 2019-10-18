@@ -11,7 +11,7 @@ namespace BeFaster.App.Solutions.CHK
         {
             // Tried to make it generic but you're making me...
 
-            if (skus == null || !skus.Matches("^[A-E]*$"))
+            if (skus == null || !skus.Matches("^[A-F]*$"))
             {
                 Console.WriteLine($"Illegal input [{nameof(skus)}={skus ?? "null"}]");
                 return -1;
@@ -51,5 +51,6 @@ namespace BeFaster.App.Solutions.CHK
 
     }
 }
+
 
 
