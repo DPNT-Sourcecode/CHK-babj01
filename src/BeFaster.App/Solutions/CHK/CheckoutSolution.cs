@@ -44,14 +44,25 @@ namespace BeFaster.App.Solutions.CHK
         public static int ComputePrice(string skus)
         {
             var skusList = skus.Split(',').ToList();
-            var skuToCountMapping = skusList.GroupBy(_ => _).ToDictionary(_ => char.Parse(_.Key), _ => _.Count());
+            var skusAndCounts = skusList.GroupBy(_ => _).Select(_ => (char.Parse(_.Key), _.Count()));
             var sum = 0;
-            foreach (var skuToCount in skuToCountMapping)
+            foreach (var skuToCount in skusAndCounts)
             {
+                var (sku, count) = skuToCount;
+
+                foreach (var amountAndCount in SkuToAmountsAndPricesMapping[sku])
+                {
+
+                    if (count == 0)
+                    {
+                        break;
+                    }
+                }
                 
             }
         }
     }
 }
+
 
 
