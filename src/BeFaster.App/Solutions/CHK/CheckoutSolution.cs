@@ -26,6 +26,7 @@ namespace BeFaster.App.Solutions.CHK
             var aCount = skuToCountMapping.GetValueOrDefault('A');
             var bCount = skuToCountMapping.GetValueOrDefault('B');
             var eCount = skuToCountMapping.GetValueOrDefault('E');
+            var fCount = skuToCountMapping.GetValueOrDefault('F');
 
             var aAfter5Count = aCount % 5;
             var aAfter3Count = aAfter5Count % 3;
@@ -46,3 +47,4 @@ namespace BeFaster.App.Solutions.CHK
 
     }
 }
+
