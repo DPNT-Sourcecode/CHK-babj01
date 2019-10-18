@@ -1,53 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using RestSharp.Extensions;
 
 namespace BeFaster.App.Solutions.CHK
 {
     public static class CheckoutSolution
     {
-        private static readonly Dictionary<char, List<(int Amount, int Price)>> SkuToAmountsAndPricesMapping =
-            new Dictionary<char, List<(int Amount, int Price)>>
-            {
-                {
-                    'A',
-                    new List<(int Amount, int Price)>
-                    {
-                        (3, 130),
-                        (1, 50)
-                    }
-                },
-                {
-                    'B',
-                    new List<(int Amount, int Price)>
-                    {
-                        (2, 45),
-                        (1, 30)
-                    }
-                },
-                {
-                    'C',
-                    new List<(int Amount, int Price)>
-                    {
-                        (1, 20)
-                    }
-                },
-                {
-                    'D',
-                    new List<(int Amount, int Price)>
-                    {
-                        (1, 15)
-                    }
-                }
-            };
-
         public static int ComputePrice(string skus)
         {
+            if (skus == null || !skus.Matches("[A-E]*"))
+            {
+                Console.WriteLine($"Illegal input [{nameof(skus)}={skus ?? "null"}]");
+                return -1;
+            }
+
+            var skuToCountMapping =
+                skus.GroupBy(c => c).
+                    ToDictionary(
+                        grouping => grouping.Key,
+                        grouping => grouping.Count());
+
+
+            if (skuToCountMapping.Keys.Any(sku => ))
             var sum = 0;
 
-            try
-            {
-                foreach (var skuAndCount in skus.GroupBy(_ => _).Select(_ => (_.Key, _.Count())))
+            foreach (var skuAndCount in )
                 {
                     var (sku, count) = skuAndCount;
 
