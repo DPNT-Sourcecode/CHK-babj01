@@ -50,8 +50,10 @@ namespace BeFaster.App.Solutions.CHK
             {
                 var (sku, count) = skuToCount;
 
-                foreach (var amountAndCount in SkuToAmountsAndPricesMapping[sku])
+                foreach (var (amount, price) in SkuToAmountsAndPricesMapping[sku])
                 {
+                    sum += count / amount * price;
+                    count %= amount;
 
                     if (count == 0)
                     {
@@ -63,6 +65,7 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 
 
 
