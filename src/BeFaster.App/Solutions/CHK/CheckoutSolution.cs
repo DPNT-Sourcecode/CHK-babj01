@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using BeFaster.Runner.Exceptions;
 
 namespace BeFaster.App.Solutions.CHK
 {
@@ -9,7 +9,7 @@ namespace BeFaster.App.Solutions.CHK
         private static readonly Dictionary<char, List<(int Amount, int Price)>> SkuToAmountsAndPricesMapping =
             new Dictionary<char, List<(int Amount, int Price)>>
             {
-                { 
+                {
                     'A',
                     new List<(int Amount, int Price)>
                     {
@@ -43,26 +43,31 @@ namespace BeFaster.App.Solutions.CHK
 
         public static int ComputePrice(string skus)
         {
-            var skusList = skus.Split(',').ToList();
-            var skusAndCounts = skusList.GroupBy(_ => _).Select(_ => (char.Parse(_.Key), _.Count()));
-            var sum = 0;
-            foreach (var skuToCount in skusAndCounts)
+            try
             {
-                var (sku, count) = skuToCount;
-
-                foreach (var (amount, price) in SkuToAmountsAndPricesMapping[sku])
+                var skusList = skus.Split(',').ToList();
+                var skusAndCounts = skusList.GroupBy(_ => _).Select(_ => (char.Parse(_.Key), _.Count()));
+                var sum = 0;
+                foreach (var skuToCount in skusAndCounts)
                 {
-                    sum += count / amount * price;
-                    count %= amount;
+                    var (sku, count) = skuToCount;
 
-                    if (count == 0)
+                    foreach (var (amount, price) in SkuToAmountsAndPricesMapping[sku])
                     {
-                        break;
+                        sum += count / amount * price;
+                        count %= amount;
+
+                        if (count == 0) break;
                     }
                 }
-            }
 
-            return sum;
+                return sum;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return -1;
+            }
         }
     }
 }
