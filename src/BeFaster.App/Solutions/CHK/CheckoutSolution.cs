@@ -16,35 +16,13 @@ namespace BeFaster.App.Solutions.CHK
             }
 
             var skuToCountMapping =
-                skus.GroupBy(c => c).
+                skus.GroupBy(sku => sku).
                     ToDictionary(
                         grouping => grouping.Key,
                         grouping => grouping.Count());
 
-
-            if (skuToCountMapping.Keys.Any(sku => ))
-            var sum = 0;
-
-            foreach (var skuAndCount in )
-                {
-                    var (sku, count) = skuAndCount;
-
-                    foreach (var (amount, price) in SkuToAmountsAndPricesMapping[sku])
-                    {
-                        sum += count / amount * price;
-                        count %= amount;
-
-                        if (count == 0) break;
-                    }
-                }
-
-                return sum;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return -1;
-            }
+            skuToCountMapping
         }
+
     }
 }
