@@ -13,16 +13,16 @@ namespace BeFaster.App.Solutions.CHK
                     'A',
                     new List<(int Amount, int Price)>
                     {
-                        (1, 50),
-                        (3, 130)
+                        (3, 130),
+                        (1, 50)
                     }
                 },
                 {
                     'B',
                     new List<(int Amount, int Price)>
                     {
-                        (1, 30),
-                        (2, 45)
+                        (2, 45),
+                        (1, 30)
                     }
                 },
                 {
@@ -66,6 +66,7 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 
 
 
