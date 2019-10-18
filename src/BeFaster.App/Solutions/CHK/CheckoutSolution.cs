@@ -49,7 +49,7 @@ namespace BeFaster.App.Solutions.CHK
 
         public static int ComputePrice(string skus)
         {
-            if (skus == null || skus.Matches("^[A-Z]*$"))
+            if (skus == null || !skus.Matches("^[A-Z]*$"))
             {
                 Console.WriteLine($"Invalid input [{nameof(skus)}={skus ?? "null"}]");
                 return -1;
@@ -88,6 +88,7 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 
 
 
