@@ -55,10 +55,19 @@ namespace BeFaster.App.Solutions.CHK
                 return -1;
             }
 
-            foreach
+            var skuToCountMapping = skus.GroupBy(_ => _).ToDictionary(_ => _.Key, _ => _.Count());
+            foreach (var sale in FreeSkuToQualifyingSkuAndAmount)
+            {
+                skuToCountMapping[sale.FreeSku] =
+                    Math.Max(
+                        0,
+                        skuToCountMapping.GetValueOrDefault(sale.FreeSku) -
+                        skuToCountMapping.GetValueOrDefault(sale.QualifyingSku) / sale.Amount);
+                
+            }
 
             var sum = 0;
-            foreach (var skuAndCount in skus.GroupBy(_ => _).Select(_ => (_.Key, _.Count())))
+            foreach (var skuAndCount in )
             {
                 var (sku, count) = skuAndCount;
 
@@ -75,3 +84,4 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
