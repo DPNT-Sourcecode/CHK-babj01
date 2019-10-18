@@ -38,7 +38,7 @@ namespace BeFaster.App.Solutions.CHK
                 {'Z', new[] {(1, 50)}}
             };
 
-        private static readonly (char FreeSku, char QualifyingSku, int Amount)[] FreeSkuAndQualifyingSkuAndAmount =
+        private static readonly (char FreeSku, char QualifyingSku, int Amount)[] FreeSkusAndQualifyingSkusAndAmounts =
             new []
             {
                 ('B', 'E', 2),
@@ -57,15 +57,16 @@ namespace BeFaster.App.Solutions.CHK
 
             var skuToCountMapping = skus.GroupBy(c => c).
                 ToDictionary(
-                grouping => grouping.Key,
-                grouping => grouping.Count());
-            foreach (var sale in FreeSkuAndQualifyingSkuAndAmount)
+                    grouping => grouping.Key,
+                    grouping => grouping.Count());
+            foreach (var FreeSkuAndQualifyingSkuAndAmount in FreeSkusAndQualifyingSkusAndAmounts)
             {
-                skuToCountMapping[sale.FreeSku] =
+                skuToCountMapping[FreeSkuAndQualifyingSkuAndAmount.FreeSku] =
                     Math.Max(
                         0,
-                        skuToCountMapping.GetValueOrDefault(sale.FreeSku) -
-                        skuToCountMapping.GetValueOrDefault(sale.QualifyingSku) / sale.Amount);
+                        skuToCountMapping.GetValueOrDefault(FreeSkuAndQualifyingSkuAndAmount.FreeSku) -
+                        skuToCountMapping.GetValueOrDefault(FreeSkuAndQualifyingSkuAndAmount.QualifyingSku) /
+                        FreeSkuAndQualifyingSkuAndAmount.Amount);
                 
             }
 
@@ -87,5 +88,6 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 
 
